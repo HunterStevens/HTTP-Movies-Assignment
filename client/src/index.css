@@ -21,6 +21,15 @@ body {
   font-size: 0.8rem;
 }
 
+.update-form{
+  display: flex;
+  flex-direction: column;
+}
+.update-input{
+  padding:1%;
+  margin:1%;
+}
+
 .saved-list {
   background-color: #fff;
   border: 0;

@@ -1,20 +1,55 @@
-import React, {useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {useHistory, useParams} from 'react-router-dom';
 import axios from "axios";
 
+
+const initialMovie = {
+    title:'',
+    director:'',
+    metascore:'',
+    stars:''
+}
+
 export const UpdateMovie = props =>{
+    const [movie, setMovie] = useState(initialMovie);
+    const {id} = useParams();
+    const {push} = useHistory();
 
-    const makeUpdate= event =>{
+    useEffect(() =>{
+        axios.get(`http://localhost:5000/api/movies/${id}`)
+        .then(res =>{
+            console.log(res);
+            setMovie(res.data);
+        })
+        .catch(err =>{
+            console.log(err);
+        })
+    },[id])
 
+    const makeUpdate = event =>{
+
+    }
+
+    const handleChange = event =>{
+        event.preventDefault();
+
+        setMovie({
+            ...movie,
+            [event.target.name]:event.target.value
+        })
     }
 
     return(
         <div className="movie-card">
-            <form onSubmit={makeUpdate}>
-                <input type="text" placeholder="Title"/>
-                <input type="text" placeholder="Director"/>
-                <input type="text" placeholder="Metascore"/>
-                <input type="text" placeholder="Actors"/>
+            <form className="update-form" onSubmit={makeUpdate}>
+                <input className="update-input" type="text" value={movie.title} onChange={handleChange} placeholder="Title"/>
+                
+                <input className="update-input" type="text" value={movie.director} onChange={handleChange} placeholder="Director"/>
+                
+                <input className="update-input" type="number" value={movie.metascore} onChange={handleChange} placeholder="Metascore"/>
+                
+                <input className="update-input" type="text" value={movie.stars} onChange={handleChange} placeholder="Actors"/>
+                
                 <button>Save Update</button>
             </form>
         </div>
