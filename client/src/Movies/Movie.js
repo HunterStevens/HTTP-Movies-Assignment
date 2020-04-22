@@ -40,6 +40,8 @@ function Movie({ addToSavedList }, props) {
     })
   }
 
+  
+
   return (
     <div className="save-wrapper">
       <MovieCard movie={movie} />
