@@ -13,7 +13,9 @@ const App = () => {
   const getMovieList = () => {
     axios
       .get("http://localhost:5000/api/movies")
-      .then(res => setMovieList(res.data))
+      .then(res => {
+        console.log(res)
+        setMovieList(res.data)})
       .catch(err => console.log(err.response));
   };
 
@@ -34,7 +36,7 @@ const App = () => {
       </Route>
 
       <Route path="/movies/:id">
-        <Movie addToSavedList={addToSavedList} />
+        <Movie addToSavedList={addToSavedList} setMovieList={setMovieList} />
       </Route>
       <Route path="/update-movie/:id">
         <UpdateMovie />

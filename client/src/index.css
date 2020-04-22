@@ -75,6 +75,11 @@ body {
   color: white;
 }
 
+.update-button{
+  display: flex;
+  align-self: flex-end;
+}
+
 .home-button {
   padding: 5px 10px;
   background-color: lightskyblue;
