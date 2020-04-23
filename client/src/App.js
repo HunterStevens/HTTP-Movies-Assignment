@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route } from "react-router-dom";
+import { Route, useHistory, useParams } from "react-router-dom";
 import SavedList from "./Movies/SavedList";
 import MovieList from "./Movies/MovieList";
 import Movie from "./Movies/Movie";
@@ -18,18 +18,9 @@ const App = () => {
         setMovieList(res.data)})
       .catch(err => console.log(err.response));
   };
-
   const addToSavedList = movie => {
     setSavedList([...savedList, movie]);
   };
-
-  const updateList = movie =>{
-    setMovieList({
-      ...movieList,
-      movie
-    })
-  }
-
   useEffect(() => {
     getMovieList();
   }, []);
@@ -37,16 +28,14 @@ const App = () => {
   return (
     <>
       <SavedList list={savedList} />
-
       <Route exact path="/">
         <MovieList movies={movieList} />
       </Route>
-
       <Route path="/movies/:id">
-        <Movie addToSavedList={addToSavedList} setMovieList={movieList} />
+        <Movie addToSavedList={addToSavedList} getMovieList={getMovieList}/>
       </Route>
       <Route path="/update-movie/:id">
-        <UpdateMovie {...props}/>
+        <UpdateMovie movies={movieList} getMovieList={getMovieList} />
       </Route>
     </>
   );
