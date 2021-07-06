@@ -21,6 +21,15 @@ body {
   font-size: 0.8rem;
 }
 
+.update-form{
+  display: flex;
+  flex-direction: column;
+}
+.update-input{
+  padding:1%;
+  margin:1%;
+}
+
 .saved-list {
   background-color: #fff;
   border: 0;
@@ -64,6 +73,11 @@ body {
 .save-button:hover {
   background-color: green;
   color: white;
+}
+
+.update-button{
+  display: flex;
+  align-self: flex-end;
 }
 
 .home-button {
